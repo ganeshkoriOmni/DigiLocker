@@ -16,6 +16,6 @@ export const userRegister = async (requestData, token) => {
   };
 
   export const userLogin = async (formData) => {
-    const response = await axios.post(`${backendURL}/login?${formData}`, formData);
+    const response = await axios.post(`${backendURL}/login`, formData);
     return response.data;
   };

@@ -9,22 +9,20 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const loginSubmit = async (e) => {
+      e.preventDefault()
 
-    const loginSubmit = async () => {
-        setEmail(email);
-
-        sessionStorage.setItem("userId", "11111");
-        sessionStorage.setItem("token", "00000000000");
-        sessionStorage.setItem("userEmail", email);
-        //navigate('/dashboard')
         const loginInfo = {
-            'email' : email,
-            'password' : password
+            email,
+            password
         };
 
         try {
             const loginApi = await userLogin(loginInfo);
-            console.log(loginApi.data)
+            console.log(loginApi.data[0].email);
+            sessionStorage.setItem("userId", loginApi.data[0].id);
+            sessionStorage.setItem("userEmail", loginApi.data[0].email);
+            navigate('/dashboard')
           } catch (error) {
 
           }
@@ -35,14 +33,14 @@ function Login() {
   return (
     <>
     Login
-    <Form>
+    <Form onSubmit={loginSubmit}>
       <Form.Group className="mb-3" controlId="emailForm">
         <Form.Label>Email address</Form.Label>
         <Form.Control 
             onChange={e => {
               setEmail(e.target.value);
             }}
-            type="email" placeholder="name@example.com" />
+            type="email" name='email' placeholder="name@example.com" />
       </Form.Group>
       <Form.Group className="mb-3" controlId="passwordForm">
         <Form.Label>Password</Form.Label>
@@ -50,10 +48,10 @@ function Login() {
         onChange={e => {
             setPassword(e.target.value);
           }}
-          type="email" placeholder="*********" />
+          type="password" name='password' placeholder="*********" />
       </Form.Group>
       
-      <button type='submit' onClick={loginSubmit} variant="secondary">
+      <button variant="secondary">
                     Login
                 </button>
     </Form>
