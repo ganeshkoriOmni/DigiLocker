@@ -22,6 +22,13 @@ var connection = mysql.createConnection({
   password : 'root',
   database : 'digi_locker'
 });
+connection.connect(function(err) {
+	if (err) {
+		console.log('sql connection error CheckEmail');
+		error.data = err;
+		response.send(error);
+	}
+});
 
 var success = {
 	data : '',
@@ -41,54 +48,72 @@ app.get("/", function(request, response){
     response.send("Hello!!");
 });
 
+app.post("/CheckEmail", function(request, response){
+
+	console.log(request.body.email)
+
+		connection.query("SELECT * FROM users WHERE email = '"+request.body.email+"'", function (err, result) {
+			if (err) {
+				console.log('sql error');
+				error.data = err;
+				response.send(error);
+			}else if(result.length >= 1){
+				console.log('Email already exist');
+				error.data = err;
+				response.send(error);
+			}else {
+				console.log('Email check success');
+				success.data = result;
+				response.send(success);
+			}
+		  });
+	
+});
+
 app.post("/login", function(request, response){ //Login Form
 	
 	/*let urlQuery = url.parse(request.url, true);
 	let queryData = urlQuery.query;*/
 
 	console.log("Email : "+request.body.email)
-
-	connection.connect(function(err) {
-	    if (err) {
-			console.log('sql connection error');
-			error.data = err;
-			response.send(error);
-		}
 		
 		connection.query("SELECT * FROM users WHERE email = '"+request.body.email+"' AND password = '"+request.body.password+"'", function (err, result, fields) {
 			if (err) {
 				console.log('Login sql error');
 				error.data = err;
 				response.send(error);
-			}
-			
-			if(result.length >= 1){
+			}else if(result.length >= 1){
 				console.log('Login success');
+				success.data = result;
+				response.send(success);
+			}else{
+				response.send(error);
+			}
+		  });
+
+});
+
+app.post("/Register", function(request, response){
+	
+	let urlQuery = url.parse(request.url, true);
+	let queryData = urlQuery.query;
+
+		
+		let sqlRegister = "INSERT INTO users (fname, mname, lname, email, password, address) VALUES ('"+request.body.fname+"', '"+request.body.mname+"', '"+request.body.lname+"', '"+request.body.email+"', '"+request.body.password+"', '')";
+		connection.query(sqlRegister, function (err, result) {
+			if (err) {
+				console.log('Register sql error');
+				error.data = err;
+				response.send(error);
+			}else {
+				console.log('Register success');
 				success.data = result;
 				response.send(success);
 			}
 		  });
-	});
 });
 
-app.get("/Register", function(request, response){
-	
-	let urlQuery = url.parse(request.url, true);
-	let queryData = urlQuery.query;
-	
-	connection.connect(function(err) {
-		if (err) throw err;
-		console.log("Connected!");
-		var sql = "INSERT INTO customers (name, address) VALUES ('Company Inc', 'Highway 37')";
-		connection.query(sql, function (err, result) {
-			if (err) throw err;
-			console.log("1 record inserted");
-		});
-	});
-    response.send("Register");
-});
-
-app.get("/dashbord", function(request, response){
+app.get("/Dashbord", function(request, response){
     response.send("dashbord");
 });
 
