@@ -1,0 +1,15 @@
+body {
+    place-items: normal;
+    display: block;
+}
+.main-page {
+    padding: 20px;
+    margin: 0 auto;
+}
+.main-page-small {
+    max-width: 600px;
+    margin: 0 auto;
+}
+input:-internal-autofill-selected {
+    background-color: #fff !important;
+}

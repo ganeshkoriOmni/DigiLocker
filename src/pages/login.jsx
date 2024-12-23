@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { userLogin } from '../services/api';
 
 function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
 
     const loginSubmit = async (e) => {
       e.preventDefault()
@@ -19,10 +20,17 @@ function Login() {
 
         try {
             const loginApi = await userLogin(loginInfo);
+            console.log(loginApi);
+            if(loginApi.status =='Error'){
+              console.log(loginApi.status);
+              setError(true)
+            }else{
             console.log(loginApi.data[0].email);
             sessionStorage.setItem("userId", loginApi.data[0].id);
             sessionStorage.setItem("userEmail", loginApi.data[0].email);
-            navigate('/dashboard')
+            setError(false)
+            navigate('/Dashboard');
+            }
           } catch (error) {
 
           }
@@ -32,7 +40,10 @@ function Login() {
 
   return (
     <>
-    Login
+    <div className='main-page'>
+    <div className='main-page-small'>
+    <h1>Login</h1>
+    {error ? "Please enter valid details" : ""}
     <Form onSubmit={loginSubmit}>
       <Form.Group className="mb-3" controlId="emailForm">
         <Form.Label>Email address</Form.Label>
@@ -51,10 +62,11 @@ function Login() {
           type="password" name='password' placeholder="*********" />
       </Form.Group>
       
-      <button variant="secondary">
-                    Login
-                </button>
+      <button variant="secondary"> Login </button>
+      <Link to="../Register">Register</Link>
     </Form>
+    </div>
+    </div>
     </>
   )
 }

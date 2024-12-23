@@ -1,18 +1,18 @@
 import { Outlet } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
+import  Navigation  from '../components/navigation/navigation';
 
 const Layout = () => {
     return (
-        <div className='main-wrapper'>
-                <main className="content">
-                    <Outlet />
-                    <ul>
-                        <li className="nav-item"> <Link to="Login">Login</Link></li>
-                        <li className="nav-item"> <Link to="Register">Register</Link></li>
-                    </ul>
-                </main>
-        </div>
+        <>
+            <div className='main-wrapper'>
+                <Navigation />
+                    <main className="content">
+                        <Outlet />
+                    </main>
+            </div>
+        </>
     );
 };
 
