@@ -25,9 +25,11 @@ function Login() {
               console.log(loginApi.status);
               setError(true)
             }else{
-            console.log(loginApi.data[0].email);
-            sessionStorage.setItem("userId", loginApi.data[0].id);
-            sessionStorage.setItem("userEmail", loginApi.data[0].email);
+            console.log(loginApi.data[0].fieldEmail);
+            sessionStorage.setItem("userId", loginApi.data[0].fieldId);
+            sessionStorage.setItem("userEmail", loginApi.data[0].fieldEmail);
+            sessionStorage.setItem("userName", loginApi.data[0].fieldName);
+            sessionStorage.setItem("userLastName", loginApi.data[0].fieldLastName);
             setError(false)
             navigate('/Dashboard');
             }
@@ -63,7 +65,7 @@ function Login() {
       </Form.Group>
       
       <button variant="secondary"> Login </button>
-      <Link to="../Register">Register</Link>
+       Not a member? <Link to="../Register">Register</Link>
     </Form>
     </div>
     </div>

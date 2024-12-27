@@ -1,0 +1,18 @@
+.documents-list {
+    display: inline-block;
+    width: 20%;
+    padding: 10px;
+    margin-bottom: 20px;
+    min-width: 200px;
+}
+.toastui-editor-mode-switch {
+    display: none !important;
+}
+.document-editor > div {
+    /* height: 100% !important; */
+}
+.card-option, .page-title {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+}

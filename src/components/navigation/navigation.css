@@ -1,0 +1,11 @@
+
+.login-option {
+    margin-left: 20px;
+}
+.login-option img {
+    width: 30px;
+}
+.login-option:hover .dropdown-menu {
+    display: block;
+    right: 0;
+}

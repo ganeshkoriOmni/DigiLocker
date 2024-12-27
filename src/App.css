@@ -5,6 +5,7 @@ body {
 .main-page {
     padding: 20px;
     margin: 0 auto;
+    max-width: 1400px;
 }
 .main-page-small {
     max-width: 600px;

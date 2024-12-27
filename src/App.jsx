@@ -7,6 +7,11 @@ import Layout from './components/Layout';
 import Login from './pages/login';
 import Register from './pages/register';
 import Dashboard from './pages/dashboard/dashboard';
+import Documents from './pages/documents/documents'
+import DocumentsAdd from './pages/documents/documentsAdd'
+import DocumentsEdit from './pages/documents/documentsEdit'
+import DocumentsView from './pages/documents/documentsView';
+import Folder from './pages/folder/folder';
 
 function App() {
 
@@ -18,6 +23,11 @@ function App() {
             <Route path="/Login" element={<Login />} />
             <Route path="/Register" element={<Register />} />
             <Route path="/Dashboard" element={<Dashboard />} />
+            <Route path="/Documents" element={<Documents />} />
+            <Route path="/DocumentsAdd" element={<DocumentsAdd />} />
+            <Route path="/DocumentsEdit/:id" element={<DocumentsEdit />} />
+            <Route path="/DocumentsView/:id" element={<DocumentsView />} />
+            <Route path="/Folder" element={<Folder />} />
           </Route>
         </Routes>
     </>

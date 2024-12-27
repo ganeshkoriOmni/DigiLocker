@@ -9,7 +9,9 @@ const Dashboard = () => {
 
   return (
     <>
-    Dashboard : {userEmail}
+    <div className='main-page'>
+      Dashboard : {userEmail}
+    </div>
     </>
   )
 }

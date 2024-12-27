@@ -7,10 +7,13 @@ const Layout = () => {
     return (
         <>
             <div className='main-wrapper'>
-                <Navigation />
-                    <main className="content">
-                        <Outlet />
-                    </main>
+                <header>
+                    <Navigation />
+                </header>
+
+                <main className="content">
+                    <Outlet />
+                </main>
             </div>
         </>
     );
