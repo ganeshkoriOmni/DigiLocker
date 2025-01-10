@@ -64,3 +64,15 @@ export const userRegister = async (formData, token) => {
     const result = await axios.post(`${backendURL}/DocumnetAdd`,data,{ headers });
     return result;
   };
+
+  export const getFoldersApi = async (userId) => {
+    const headers = {
+      authorization: `Bearer asdf`,
+    };
+    try {
+      const result = await axios.get(`${backendURL}/Folders?id=${userId}`,{ headers });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
