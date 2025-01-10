@@ -185,6 +185,26 @@ app.post("/DocumnetAdd", function(request, response){
 		  });
 });
 
+app.get("/Folders", function(request, response){
+	let urlQuery = url.parse(request.url, true);
+	let queryData = urlQuery.query;
+    console.log("Folder : "+queryData.id);
+
+		connection.query("SELECT * FROM tbl_folder WHERE fieldUserId = '"+queryData.id+"'", function (err, result, fields) {
+			if (err) {
+				console.log('Folder sql error');
+				error.data = err;
+				response.send(err);
+			}else if(result.length >= 1){
+				console.log('Folder success');
+				success.data = result;
+				response.send(result);
+			}else{
+				response.send(error);
+			}
+		  });
+});
+
 app.get("/Dashbord", function(request, response){
     response.send("dashbord");
 });
