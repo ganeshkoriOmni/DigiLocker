@@ -205,6 +205,23 @@ app.get("/Folders", function(request, response){
 		  });
 });
 
+app.get("/Share", function(request, response){
+
+		connection.query("SELECT * FROM tbl_documents WHERE fieldOption = 'Share'", function (err, result, fields) {
+			if (err) {
+				console.log('DocumnetShare sql error');
+				error.data = err;
+				response.send(err);
+			}else if(result.length >= 1){
+				console.log('DocumnetShare success');
+				success.data = result;
+				response.send(result);
+			}else{
+				response.send(error);
+			}
+		  });
+});
+
 app.get("/Dashbord", function(request, response){
     response.send("dashbord");
 });
