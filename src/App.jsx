@@ -12,6 +12,7 @@ import DocumentsAdd from './pages/documents/documentsAdd'
 import DocumentsEdit from './pages/documents/documentsEdit'
 import DocumentsView from './pages/documents/documentsView';
 import Folder from './pages/folder/folder';
+import Shares from './pages/share/shares';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/DocumentsEdit/:id" element={<DocumentsEdit />} />
             <Route path="/DocumentsView/:id" element={<DocumentsView />} />
             <Route path="/Folder" element={<Folder />} />
+            <Route path="/Shares" element={<Shares />} />
           </Route>
         </Routes>
     </>

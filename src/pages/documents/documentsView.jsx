@@ -13,6 +13,7 @@ const DocumentsView = () => {
     const [documentsName, setDocumentsName] = useState(null);
     const [documentsData, setDocumentsData] = useState(null);
     const [documentsEdit, setDocumentsEdit] = useState(false);
+    const [documentsOption, setDocumentsOption] = useState(true);
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -24,6 +25,10 @@ const DocumentsView = () => {
               setDocumentsId(result.data[0].fieldId);
               setDocumentsName(result.data[0].fieldName);
               setDocumentsData(result.data[0].fieldData);
+              if(result.data[0].fieldOption == 'Share'){
+                setDocumentsOption(false);
+              }
+              
               setDocumentsEdit(true);
             }
           } catch (error) {
@@ -36,7 +41,7 @@ const DocumentsView = () => {
       const options = {
         filename: `${documentsName}.pdf`,
         page: {
-          margin: 20
+          margin: 10
         }
       };
 
@@ -59,7 +64,9 @@ const DocumentsView = () => {
                 <button onClick={() => window.history.back()} className='btn btn-icon'>Back</button>
             </div>
             <div className='document-option'>
-              <button onClick={share} className='btn btn-icon'>Share</button>
+              {documentsOption && (
+                <button onClick={share} className='btn btn-icon'>Share</button>
+              )}
               <button onClick={download} className='btn btn-icon'>Download</button>
             </div>
             <div className='document-viewer'>

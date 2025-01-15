@@ -76,3 +76,15 @@ export const userRegister = async (formData, token) => {
       throw error;
     }
   };
+
+  export const getShareApi = async (userId) => {
+    const headers = {
+      authorization: `Bearer asdf`,
+    };
+    try {
+      const result = await axios.get(`${backendURL}/Share`,{ headers });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
