@@ -42,6 +42,9 @@ var error = {
 	code : '304'
 }
 
+//let currentDate = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+let currentDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+
 app.use(cors());
 
 app.get("/", function(request, response){	
@@ -155,16 +158,17 @@ app.get("/DocumnetId", function(request, response){
 
 app.put("/DocumnetUpdate", function(request, response){
 		console.log('request ',request.body.documentsName)
-		let sqlDocument = "UPDATE tbl_documents SET fieldName = '"+request.body.documentsName+"', fieldData = '"+request.body.documentDataGet+"', fieldLastDate = '2024-12-23 23:12:12' WHERE fieldId = '"+request.body.documentsId+"'";
+		
+		let sqlDocument = "UPDATE tbl_documents SET fieldName = '"+request.body.documentsName+"', fieldData = ' "+request.body.documentDataGet+" ', fieldLastDate = '"+currentDate+"' WHERE fieldId = '"+request.body.documentsId+"'";
 		connection.query(sqlDocument, function (err, result) {
 			if (err) {
-				console.log('DocumnetUpdate sql error');
+				console.log('DocumnetUpdate sql error',err);
 				error.data = err;
-				response.send(error);
+				response.send(err);
 			}else {
 				console.log('DocumnetUpdate success');
 				success.data = result;
-				response.send(success);
+				response.send(result);
 			}
 		  });
 });
@@ -174,11 +178,47 @@ app.post("/DocumnetAdd", function(request, response){
 		let sqlRegister = "INSERT INTO tbl_documents (fieldName, fieldUserId, fieldData, fieldDate) VALUES ('"+request.body.documentsName+"', '"+request.body.userId+"', '"+request.body.documentDataGet+"', '2024-12-23 23:12:12')";
 		connection.query(sqlRegister, function (err, result) {
 			if (err) {
-				console.log('DocumnetAdd sql error');
+				console.log('DocumnetAdd sql error',err);
 				error.data = err;
-				response.send(error);
+				response.send(err);
 			}else {
 				console.log('DocumnetAdd success');
+				success.data = result;
+				response.send(result);
+			}
+		  });
+});
+
+app.get("/DocumentDelete", function(request, response){
+	let urlQuery = url.parse(request.url, true);
+	let queryData = urlQuery.query;
+    console.log("DocumnetDelete ID : "+queryData.id);
+		const deleteQuery = "DELETE FROM tbl_documents WHERE fieldId = '"+queryData.id+"'";
+		connection.query(deleteQuery, function (err, result) {
+			if (err) {
+				console.log('DocumnetDelete sql error');
+				error.data = err;
+				response.send(err);
+			}else{
+				console.log('DocumnetDelete success');
+				success.data = result;
+				response.send(result);
+			}
+		  });
+});
+
+app.get("/DocumentShare", function(request, response){
+		let urlQuery = url.parse(request.url, true);
+	let queryData = urlQuery.query;
+    console.log("DocumentShare ID : "+queryData.id);
+		let sqlDocument = "UPDATE tbl_documents SET fieldOption = '"+queryData.option+"' WHERE fieldId = '"+queryData.id+"'";
+		connection.query(sqlDocument, function (err, result) {
+			if (err) {
+				console.log('DocumentShare sql error');
+				error.data = err;
+				response.send(err);
+			}else {
+				console.log('DocumentShare success');
 				success.data = result;
 				response.send(result);
 			}
@@ -223,7 +263,8 @@ app.get("/Share", function(request, response){
 });
 
 app.get("/Dashbord", function(request, response){
-    response.send("dashbord");
+	let date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+    response.send("dashbord"+date);
 });
 
 
