@@ -65,6 +65,22 @@ export const userRegister = async (formData, token) => {
     return result;
   };
 
+  export const deleteDocumentIdApi = async (documentsId, userId) => {
+    const headers = {
+      authorization: `Bearer asdf`,
+    };
+    const result = await axios.get(`${backendURL}/DocumentDelete?id=${documentsId}`,{ headers });
+    return result;
+  };
+
+  export const shareDocumentIdApi = async (documentsId, option, userId) => {
+    const headers = {
+      authorization: `Bearer asdf`,
+    };
+    const result = await axios.get(`${backendURL}/DocumentShare?id=${documentsId}&option=${option}`,{ headers });
+    return result;
+  };  
+
   export const getFoldersApi = async (userId) => {
     const headers = {
       authorization: `Bearer asdf`,
@@ -88,3 +104,17 @@ export const userRegister = async (formData, token) => {
       throw error;
     }
   };
+
+  export const getDashboardApi = async (userId) => {
+    const headers = {
+      authorization: `Bearer asdf`,
+    };
+    try {
+      const result = await axios.get(`${backendURL}/Dashbord`,{ headers });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+   

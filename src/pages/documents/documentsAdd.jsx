@@ -12,6 +12,7 @@ const DocumentsAdd = () => {
     let userId = sessionStorage.getItem("userId");
     const [documentsName, setDocumentsName] = useState('Document Name');
     const [documentsSaved, setDocumentsSaved] = useState(false);
+    const [msgStatus, setMsgStatus] = useState(false);
 
   const saveEditor = async () => {
     const documentDataGet = editorRef.current.editorInst.getHTML();
@@ -21,9 +22,12 @@ const DocumentsAdd = () => {
       documentDataGet
     }
     try {
-      const result = await addDocumentIdApi(documentForm,userId)
+      const result = await addDocumentIdApi(documentForm,userId);
+      console.log(result);
       if (result.status === 200) {
         setDocumentsSaved(true)
+      }else{
+        setMsgStatus(true)
       }
     } catch (error) {
       console.error(error)
@@ -44,9 +48,9 @@ const DocumentsAdd = () => {
                 <button onClick={() => window.history.back()} className='btn btn-icon'>Back</button>
             </div>
             <div className='document-editor'>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Document : </span>
-                <input type="text" class="form-control" 
+              <div className="input-group mb-3">
+                <span className="input-group-text" id="basic-addon1">Document : </span>
+                <input type="text" className="form-control" 
                 onChange={e => {
                   setDocumentsName(e.target.value);
                 }}

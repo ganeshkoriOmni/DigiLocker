@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
@@ -8,11 +7,10 @@ import {getDocumentIdApi, updateDocumentIdApi} from '../../services/api'
 import './documents.css'
 
 const DocumentsEdit = () => {
-    const [previewStyle, setPreviewStyle] = useState("vertical");
     const editorRef = useRef();
     let userId = sessionStorage.getItem("userId");
     const [documentsId, setDocumentsId] = useState(null);
-    const [documentsName, setDocumentsName] = useState(null);
+    const [documentsName, setDocumentsName] = useState("");
     const [documentsData, setDocumentsData] = useState(null);
     const [documentsEdit, setDocumentsEdit] = useState(false);
     const [documentsSaved, setDocumentsSaved] = useState(false);
@@ -24,7 +22,9 @@ const DocumentsEdit = () => {
           try {
             const result = await getDocumentIdApi(id,userId)
             if (result.status === 200) {
-              console.log('result', result.data[0].fieldData);
+              if(result.data[0].fieldUserId != userId){
+                navigate('/Documents');
+              }
               setDocumentsId(result.data[0].fieldId);
               setDocumentsName(result.data[0].fieldName);
               setDocumentsData(result.data[0].fieldData);
@@ -70,9 +70,9 @@ const DocumentsEdit = () => {
                 <button onClick={() => window.history.back()} className='btn btn-icon'>Back</button>
             </div>
             <div className='document-editor'>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Document : </span>
-                <input type="text" class="form-control" 
+              <div className="input-group mb-3">
+                <span className="input-group-text" id="basic-addon1">Document : </span>
+                <input type="text" className="form-control" 
                 onChange={e => {
                   setDocumentsName(e.target.value);
                 }}
@@ -80,7 +80,7 @@ const DocumentsEdit = () => {
               </div>
               {documentsEdit && (<Editor
                   initialValue={documentsData}
-                  previewStyle={previewStyle}
+                  previewStyle="vertical"
                   minHeight="400px"
                   initialEditType="wysiwyg"
                   useCommandShortcut={true}

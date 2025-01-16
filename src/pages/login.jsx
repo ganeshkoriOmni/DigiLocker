@@ -31,7 +31,7 @@ function Login() {
             sessionStorage.setItem("userName", loginApi.data[0].fieldName);
             sessionStorage.setItem("userLastName", loginApi.data[0].fieldLastName);
             setError(false)
-            navigate('/Dashboard');
+            navigate('/Documents');
             }
           } catch (error) {
 

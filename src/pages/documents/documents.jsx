@@ -9,6 +9,7 @@ import { getDocumentsApi } from '../../services/api';
 
 const Documents = () => {
     let userId = sessionStorage.getItem("userId");
+    let userName = sessionStorage.getItem("userName");
     const [documentsData, setDocumentsData] = useState(null);
 
     useEffect(() => {
@@ -26,10 +27,6 @@ const Documents = () => {
         getDocumentsData()
       }, [])
 
-      const documentDelete = (documentId) => {
-        alert(documentId)
-      }
-
   return (
     <>
       <div className='main-page'>
@@ -45,12 +42,9 @@ const Documents = () => {
                         <img src={fileIcon} className="card-img-top" alt="File" />
                         <div className="card-body">
                         <Link to={`../DocumentsView/${list.fieldId}`}><h5 className="card-title">{list.fieldName}</h5></Link>
-                            <p className="card-text">Date : {list.fieldDate}</p>
-                            <p className="card-text">Created by : {list.fieldUserId}</p>
-                            <p className="card-option">
-                                <Link to={`../DocumentsEdit/${list.fieldId}`} className="btn btn-primary"><img src={editIcon} alt="Edit"/> Edit</Link>
-                                <button onClick={documentDelete} className="btn btn-primary"> <img src={deleteIcon} alt="Delete"/> Delete</button>
-                            </p>
+                            <p className="card-text">Date : {list.fieldLastDate}</p>
+                            <p className="card-text">Created by : {userName}</p>
+                            
                         </div>
                     </div>
                 </div>
