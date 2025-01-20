@@ -102,7 +102,7 @@ app.post("/Register", function(request, response){
 	let queryData = urlQuery.query;
 
 		
-		let sqlRegister = "INSERT INTO tbl_users (fieldName, fieldName, fieldEmail, fieldPassword, fieldOption) VALUES ('"+request.body.fname+"', '"+request.body.lname+"', '"+request.body.email+"', '"+request.body.password+"', 'OPEN')";
+		let sqlRegister = "INSERT INTO tbl_users (fieldName, fieldLastName, fieldEmail, fieldPassword, fieldOption) VALUES ('"+request.body.fname+"', '"+request.body.lname+"', '"+request.body.email+"', '"+request.body.password+"', 'OPEN')";
 		connection.query(sqlRegister, function (err, result) {
 			if (err) {
 				console.log('Register sql error');
@@ -159,7 +159,7 @@ app.get("/DocumnetId", function(request, response){
 app.put("/DocumnetUpdate", function(request, response){
 		console.log('request ',request.body.documentsName)
 		
-		let sqlDocument = "UPDATE tbl_documents SET fieldName = '"+request.body.documentsName+"', fieldData = ' "+request.body.documentDataGet+" ', fieldLastDate = '"+currentDate+"' WHERE fieldId = '"+request.body.documentsId+"'";
+		let sqlDocument = "UPDATE tbl_documents SET fieldName = '"+request.body.documentsName+"', fieldData = '"+request.body.documentDataGet+"', fieldLastDate = '"+currentDate+"' WHERE fieldId = '"+request.body.documentsId+"'";
 		connection.query(sqlDocument, function (err, result) {
 			if (err) {
 				console.log('DocumnetUpdate sql error',err);
@@ -175,7 +175,7 @@ app.put("/DocumnetUpdate", function(request, response){
 
 app.post("/DocumnetAdd", function(request, response){
 		console.log('request ',request.body.documentsName)
-		let sqlRegister = "INSERT INTO tbl_documents (fieldName, fieldUserId, fieldData, fieldDate) VALUES ('"+request.body.documentsName+"', '"+request.body.userId+"', '"+request.body.documentDataGet+"', '2024-12-23 23:12:12')";
+		let sqlRegister = "INSERT INTO tbl_documents (fieldName, fieldUserId, fieldData, fieldDate, fieldLastDate, fieldFolder) VALUES ('"+request.body.documentsName+"', '"+request.body.userId+"', '"+request.body.documentDataGet+"', '"+currentDate+"', '"+currentDate+"', '1')";
 		connection.query(sqlRegister, function (err, result) {
 			if (err) {
 				console.log('DocumnetAdd sql error',err);
@@ -208,21 +208,21 @@ app.get("/DocumentDelete", function(request, response){
 });
 
 app.get("/DocumentShare", function(request, response){
-		let urlQuery = url.parse(request.url, true);
+	let urlQuery = url.parse(request.url, true);
 	let queryData = urlQuery.query;
     console.log("DocumentShare ID : "+queryData.id);
-		let sqlDocument = "UPDATE tbl_documents SET fieldOption = '"+queryData.option+"' WHERE fieldId = '"+queryData.id+"'";
-		connection.query(sqlDocument, function (err, result) {
-			if (err) {
-				console.log('DocumentShare sql error');
-				error.data = err;
-				response.send(err);
-			}else {
-				console.log('DocumentShare success');
-				success.data = result;
-				response.send(result);
-			}
-		  });
+	let sqlDocument = "UPDATE tbl_documents SET fieldOption = '"+queryData.option+"' WHERE fieldId = '"+queryData.id+"'";
+	connection.query(sqlDocument, function (err, result) {
+		if (err) {
+			console.log('DocumentShare sql error');
+			error.data = err;
+			response.send(err);
+		}else {
+			console.log('DocumentShare success');
+			success.data = result;
+			response.send(result);
+		}
+	});
 });
 
 app.get("/Folders", function(request, response){
