@@ -4,17 +4,30 @@
     padding: 10px;
     margin-bottom: 20px;
     min-width: 200px;
+    margin-top: 10px;
+}
+.documents-list .card-title {
+    font-size: 14px;
+    color: #000;
+}
+.documents-list .card-body {
+    font-size: 14px;
+    color: #000;
+}
+.documents-list .card-text {
+    margin: 0;
 }
 .toastui-editor-mode-switch {
     display: none !important;
 }
-.document-editor > div {
-    /* height: 100% !important; */
+.document-editor {
+    margin-top: 20px;
 }
 .card-option, .page-title {
     display: flex;
     justify-content: space-between;
     margin: 0;
+    font-size: 22px;
 }
 .document-viewer {
     padding: 10px;
@@ -30,4 +43,43 @@
     padding: 10px;
     height: 35px;
     line-height: 10px;
+}
+.document-editor-option {
+    padding: 20px 0;
+    display: flex;
+    gap: 20px;
+}
+
+.documents-view {
+    display: flex;
+}
+.documents-left {
+    width: 20%;
+}
+.documents-right {
+    width: 80%;
+}
+.documents-left .page-title .btn {
+    display: none;
+}
+.documents-left img {
+    display: none;
+}
+.documents-left .card-text {
+    display: none;
+}
+.documents-left div.page-title {
+    border-bottom: 1px solid #bbb;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+.documents-left .documents-list {
+    padding: 0;
+    margin: 0;
+}
+.documents-left .card-body {
+    padding: 0;
+}
+.documents-left .documents-list .card {
+    border: none;
 }

@@ -7,7 +7,7 @@ import deleteIcon from "../../assets/images/delete.svg";
 import { getDocumentsApi } from '../../services/api';
 
 
-const Documents = () => {
+const Documents = ({optionEdit}) => {
     let userId = sessionStorage.getItem("userId");
     let userName = sessionStorage.getItem("userName");
     const [documentsData, setDocumentsData] = useState(null);
@@ -32,7 +32,7 @@ const Documents = () => {
       <div className='main-page'>
         <div className='documents-page'>
             <div className='page-title'>
-                <h1 className='page-title'>Documents</h1>
+                <h1 className='page-title'>Documents </h1>
                 <Link to='../DocumentsAdd' className="btn btn-icon">Add New</Link>
             </div>
             <div className='documents-lists'>
@@ -41,7 +41,7 @@ const Documents = () => {
                     <div className="card">
                         <img src={fileIcon} className="card-img-top" alt="File" />
                         <div className="card-body">
-                        <Link to={`../DocumentsView/${list.fieldId}`}><h5 className="card-title">{list.fieldName}</h5></Link>
+                        <Link to={`../${optionEdit ? 'DocumentsEdit' : 'DocumentsView' }/${list.fieldId}`}><h5 className="card-title">{list.fieldName}</h5></Link>
                             <p className="card-text">Date : {list.fieldLastDate}</p>
                             <p className="card-text">Created by : {userName}</p>
                             

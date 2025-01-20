@@ -17,6 +17,7 @@ const Shares = () => {
             const result = await getShareApi(userId)
             if (result.status === 200) {
               console.log('result', result)
+              //setDocumentsData(result.data.filter(s => s.fieldName.includes('UI')))
               setDocumentsData(result.data)
             }
           } catch (error) {
@@ -36,6 +37,9 @@ const Shares = () => {
         <div className='documents-page'>
             <div className='page-title'>
                 <h1 className='page-title'>Shares</h1>
+                <form className="d-flex" role="search">
+                    <input className="form-control me-2" type="search" placeholder="Type.." aria-label="Search" />
+                </form>
             </div>
             <div className='documents-lists'>
                 {documentsData && documentsData.length > 0 && documentsData.map((list) => (
@@ -44,7 +48,7 @@ const Shares = () => {
                         <img src={fileIcon} className="card-img-top" alt="File" />
                         <div className="card-body">
                         <Link to={`../DocumentsView/${list.fieldId}`}><h5 className="card-title">{list.fieldName}</h5></Link>
-                            <p className="card-text">Date : {list.fieldDate}</p>
+                            <p className="card-text">Date : {list.fieldLastDate}</p>
                             <p className="card-text">Created by : {list.fieldUserId}</p>
                         </div>
                     </div>
