@@ -8,7 +8,6 @@
 }
 .documents-list .card-title {
     font-size: 14px;
-    color: #000;
 }
 .documents-list .card-body {
     font-size: 14px;
@@ -38,6 +37,9 @@
 }
 .document-option .btn {
     margin-right: 20px;
+}
+.document-option .btn img {
+    width: 20px;
 }
 .page-title .btn {
     padding: 10px;
@@ -82,4 +84,7 @@
 }
 .documents-left .documents-list .card {
     border: none;
+}
+.documents-left .search-option, .documents-left .card-img-link {
+    display: none;
 }

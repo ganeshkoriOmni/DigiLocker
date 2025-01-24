@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form';
-import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { userLogin } from '../services/api';
 
-function Login() {
+const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -45,8 +44,12 @@ function Login() {
     <div className='main-page'>
     <div className='main-page-small'>
     <h1>Login</h1>
-    {error ? "Please enter valid details" : ""}
-    <Form onSubmit={loginSubmit}>
+    {error && (
+      <div className="alert alert-danger" role="alert">
+        Please enter valid details or <Link to="../Register">Register</Link>
+      </div>
+    )}
+    <Form onSubmit={loginSubmit} className='login-form'>
       <Form.Group className="mb-3" controlId="emailForm">
         <Form.Label>Email address</Form.Label>
         <Form.Control 
@@ -64,7 +67,7 @@ function Login() {
           type="password" name='password' placeholder="*********" />
       </Form.Group>
       
-      <button variant="secondary"> Login </button>
+      <button type='submit' className='btn btn-primary'> Login </button>
        Not a member? <Link to="../Register">Register</Link>
     </Form>
     </div>

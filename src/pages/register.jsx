@@ -24,9 +24,11 @@
         };
 
         try {
-          const registerApi = await userRegister(registerInfo);
-          if(registerApi.status==200){
-            navigate('/Login')
+          if(!emailCheck){
+            const registerApi = await userRegister(registerInfo);
+            if(registerApi.status==200){
+              navigate('/Login')
+            }
           }
         } catch (error) {
 
@@ -57,7 +59,7 @@
       <div className='main-page'>
       <div className='main-page-small'>
       <h1>Register</h1>
-      <Form onSubmit={registerSubmit}>
+      <Form className='register-form' onSubmit={registerSubmit}>
       <Form.Group className="mb-3" controlId="firstNameForm">
           <Form.Label>First Name</Form.Label>
           <Form.Control required
@@ -89,7 +91,9 @@
                 setEmail(e.target.value);
               }}
               type="email" name='email' placeholder="name@example.com" />
-              <p className=''>{emailCheck ? "Email already exist" : ""}</p>
+              {emailCheck && (
+                <div className=''>Email already exist</div>
+              )}
               <Form.Control.Feedback type="invalid">This is required.</Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="mb-3" controlId="passwordForm">
@@ -102,7 +106,7 @@
             <Form.Control.Feedback type="invalid">This is required.</Form.Control.Feedback>
         </Form.Group>
         
-        <button type="submit" variant="secondary" disabled={emailCheck ? "disabled" : ""}> Register </button>
+        <button type="submit" className='btn btn-primary' disabled={emailCheck ? "disabled" : ""}> Register </button>
         <Link to="../Login">Login</Link>
       </Form>
       </div>

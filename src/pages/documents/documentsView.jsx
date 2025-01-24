@@ -3,6 +3,7 @@ import generatePDF, { Resolution, Margin } from "react-to-pdf";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import '@toast-ui/editor/dist/toastui-editor.css';
 import Documents from './documents';
+import Shares from '../share/shares';
 import { Editor,Viewer } from '@toast-ui/react-editor';
 import {getDocumentIdApi, deleteDocumentIdApi, shareDocumentIdApi} from '../../services/api'
 import editIcon from "../../assets/images/edit.svg";
@@ -39,6 +40,9 @@ const DocumentsView = () => {
               setDocumentsName(result.data[0].fieldName);
               setDocumentsData(result.data[0].fieldData);
               setDocumentsUserId(result.data[0].fieldUserId);
+              if(result.data[0].fieldUserId != userId && result.data[0].fieldOption !== 'Share'){
+                navigate('/Documents');
+              }
               if(result.data[0].fieldOption == 'Share'){
                 setDocumentsOption(false);
               }
@@ -130,6 +134,7 @@ const DocumentsView = () => {
         <div className='documents-view'>
             <div className='documents-left'>
             <Documents />
+            <Shares />
             </div>
             <div className='documents-right'>
               <div className='page-title'>

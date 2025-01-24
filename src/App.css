@@ -14,3 +14,29 @@ body {
 input:-internal-autofill-selected {
     background-color: #fff !important;
 }
+.page-logo {
+    width: 20px;
+}
+.btn-primary {
+    background: #fff;
+    color: #000;
+    border-color: #000;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background: #fff;
+    color: #fdbf13;
+    border-color: #fdbf13;
+}
+a {
+    text-decoration: none;
+    color: #000;
+}
+a:hover {
+    color: #fdbf13;
+}
+.login-form .btn-primary {
+    margin-right: 10px;
+}
+.register-form .btn-primary {
+    margin-right: 20px;
+}

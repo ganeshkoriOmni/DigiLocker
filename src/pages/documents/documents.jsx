@@ -32,14 +32,16 @@ const Documents = ({optionEdit}) => {
       <div className='main-page'>
         <div className='documents-page'>
             <div className='page-title'>
-                <h1 className='page-title'>Documents </h1>
+                <h1 className='page-title'>My Documents </h1>
                 <Link to='../DocumentsAdd' className="btn btn-icon">Add New</Link>
             </div>
             <div className='documents-lists'>
                 {documentsData && documentsData.length > 0 && documentsData.map((list) => (
                 <div className='documents-list' key={list.fieldId}>
                     <div className="card">
-                        <img src={fileIcon} className="card-img-top" alt="File" />
+                    <Link  className='card-img-link' to={`../${optionEdit ? 'DocumentsEdit' : 'DocumentsView' }/${list.fieldId}`}>
+                      <img src={fileIcon} className="card-img-top" alt="File" />
+                    </Link>
                         <div className="card-body">
                         <Link to={`../${optionEdit ? 'DocumentsEdit' : 'DocumentsView' }/${list.fieldId}`}><h5 className="card-title">{list.fieldName}</h5></Link>
                             <p className="card-text">Date : {list.fieldLastDate}</p>

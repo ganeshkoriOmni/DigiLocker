@@ -4,6 +4,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 import Documents from './documents';
+import backIcon from "../../assets/images/back.svg";
 import {addDocumentIdApi} from '../../services/api'
 import './documents.css'
 
@@ -54,7 +55,7 @@ const DocumentsAdd = () => {
               )}
               <div className='page-title'>
                   <h1 className='page-title'>Documents Add</h1>
-                  <button onClick={() => window.history.back()} className='btn btn-icon'>Back</button>
+                  <button onClick={() => window.history.back()} className='btn btn-primary'><img src={backIcon} alt="Back"/> Back</button>
               </div>
               <div className='document-editor'>
                 <div className="input-group mb-3">
