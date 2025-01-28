@@ -10,8 +10,15 @@ const bodyParser = require('body-parser');
 
 let app = express();
 
-app.use(bodyParser.json()); 
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.json()); 
+//app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+
+//app.use(bodyParser.json({limit: '50mb'}));
+//app.use(bodyParser.urlencoded({extended: true, limit: '50mb'}));
+//app.use(bodyParser({limit: '50mb'}));
 
 app.use(express.static(__dirname + "/public")); //use static files in ROOT/public folder
 
@@ -267,6 +274,41 @@ app.get("/Dashbord", function(request, response){
     response.send("dashbord"+date);
 });
 
+app.get("/Profile", function(request, response){
+		let urlQuery = url.parse(request.url, true);
+	let queryData = urlQuery.query;
+    console.log("User : "+queryData.id);
+	
+		connection.query("SELECT * FROM tbl_users WHERE fieldId = '"+queryData.id+"'", function (err, result) {
+			if (err) {
+				console.log('sql error');
+				error.data = err;
+				response.send(error);
+			}else {
+				console.log('Profile check success');
+				success.data = result;
+				response.send(result);
+			}
+		  });
+	
+});
+
+app.put("/ProfileUpdate", function(request, response){
+		console.log('request ',request.body.firstName)
+		
+		let sqlDocument = "UPDATE tbl_users SET fieldName = '"+request.body.firstName+"', fieldLastName = '"+request.body.lastName+"', fieldEmail = '"+request.body.profileEmail+"', fieldPassword = '"+request.body.profilePassword+"' WHERE fieldId = '"+request.body.userId+"'";
+		connection.query(sqlDocument, function (err, result) {
+			if (err) {
+				console.log('ProfileUpdate sql error',err);
+				error.data = err;
+				response.send(err);
+			}else {
+				console.log('ProfileUpdate success');
+				success.data = result;
+				response.send(result);
+			}
+		  });
+});
 
 
 app.listen(port, host, () => {

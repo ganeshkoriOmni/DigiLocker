@@ -16,32 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `tbl_access`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `tbl_access`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `fname` varchar(255) DEFAULT NULL,
-  `mname` varchar(255) DEFAULT NULL,
-  `lname` varchar(255) DEFAULT NULL,
-  `email` varchar(500) DEFAULT NULL,
-  `password` varchar(500) DEFAULT NULL,
-  `address` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `tbl_access` (
+  `fieldId` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `fieldTable` varchar(1000) NOT NULL DEFAULT '0',
+  `fieldTableId` int NOT NULL DEFAULT '0',
+  `fieldAccess` varchar(1000) NOT NULL DEFAULT '0',
+  `fieldUser` int NOT NULL DEFAULT '0',
+  `fieldDate` datetime DEFAULT NULL,
+  `fieldOption` varchar(500) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`fieldId`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `tbl_access`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Ganesh','H','Kori','ganesh@co.in','Ganesh','Testing'),(2,'Mahesh','H','Kumar','mahesh@co.in','Mahesh','Address');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `tbl_access` WRITE;
+/*!40000 ALTER TABLE `tbl_access` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_access` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-20 13:27:06
+-- Dump completed on 2025-01-28 14:24:49
