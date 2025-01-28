@@ -117,4 +117,23 @@ export const userRegister = async (formData, token) => {
     }
   };
 
-   
+  export const getProfileApi = async (userId) => {
+    const headers = {
+      authorization: `Bearer asdf`,
+    };
+    try {
+      const result = await axios.get(`${backendURL}/Profile?id=${userId}`,{ headers });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  export const updateProfile = async (data, userId) => {
+    const headers = {
+      authorization: `Bearer asdf`,
+    };
+    const result = await axios.put(`${backendURL}/ProfileUpdate`,data,{ headers });
+    return result;
+  };
+  

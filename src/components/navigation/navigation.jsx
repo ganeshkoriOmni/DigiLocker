@@ -35,7 +35,7 @@ const Navigation = () => {
         <Link className="nav-link active" to="../Documents">Documents</Link>
         </li>
         <li className="nav-item">
-        <Link className="nav-link" to="../Folder">Folder</Link>
+        {/* <Link className="nav-link" to="../Folder">Folder</Link> */}
         </li>
         <li className="nav-item">
         <Link className="nav-link" to="../Shares">Share</Link>
@@ -54,7 +54,7 @@ const Navigation = () => {
           </span>
           <ul className="dropdown-menu text-small">
             <li><a className="dropdown-item" href="#">Settings</a></li>
-            <li><a className="dropdown-item" href="#">Profile</a></li>
+            <li><Link className="dropdown-item" to="../Profile">Profile</Link></li>
             <li><hr className="dropdown-divider" /></li>
             <li><button className="dropdown-item" onClick={logout}>Sign out</button></li>
           </ul>
